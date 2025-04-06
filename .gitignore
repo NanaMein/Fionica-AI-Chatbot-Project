@@ -1,10 +1,31 @@
+#visual studio
 bin/
 obj/
 *.user
 *.suo
-*.env
-appsettings.Development.json
 packages/
 node_modules/
 tools/
 .vs/
+appsettings.Development.json
+
+#general python related files
+*.pyc
+__pycache__/
+*.pyo
+
+#environments
+venv/
+*.env
+
+#IDE specific files
+.idea/
+.vscode/
+
+#logs and debugs
+*.log
+*.tmp
+*.pid
+
+#ignore the virtual environment created by Pipenv
+Pipfile.lock
