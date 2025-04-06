@@ -8,3 +8,24 @@ packages/
 node_modules/
 tools/
 .vs/
+
+#general python related files
+*.pyc
+__pycache__/
+*.pyo
+
+#environments
+venv/
+*.env
+
+#IDE specific files
+.idea/
+.vscode/
+
+#logs and debugs
+*.log
+*.tmp
+*.pid
+
+#ignore the virtual environment created by Pipenv
+Pipfile.lock
