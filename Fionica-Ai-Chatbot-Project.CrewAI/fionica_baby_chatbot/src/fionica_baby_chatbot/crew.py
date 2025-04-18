@@ -1,33 +1,39 @@
+import os
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
+from langchain_groq import ChatGroq
+from crewai.agents.agent_builder.base_agent import BaseAgent
+from dotenv import load_dotenv
+from typing import List
+
+load_dotenv()
 
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
 
 @CrewBase
-class FionicaBabyChatbot():
-    """FionicaBabyChatbot crew"""
-
-    # Learn more about YAML configuration files here:
-    # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
-    # Tasks: https://docs.crewai.com/concepts/tasks#yaml-configuration-recommended
+class FionicaBabyChatbot:
+    # agents: List[BaseAgent]
+    # tasks: List[Task]
     agents_config = 'config/agents.yaml'
     tasks_config = 'config/tasks.yaml'
+    llm_model = ChatGroq(model=os.getenv('CHEAP_MODEL'), api_key=os.getenv('GROQ_API_KEY'), temperature=.3)
 
-    # If you would like to add tools to your agents, you can learn more about it here:
-    # https://docs.crewai.com/concepts/agents#agent-tools
+
     @agent
-    def researcher(self) -> Agent:
+    def school_girl_agent(self) -> Agent:
         return Agent(
-            config=self.agents_config['researcher'],
+            config=self.agents_config['school_girl_agent'],# type: ignore[index]
+            llm=self.llm_model,
             verbose=True
         )
 
     @agent
-    def reporting_analyst(self) -> Agent:
+    def translator_agent(self) -> Agent:
         return Agent(
-            config=self.agents_config['reporting_analyst'],
+            config=self.agents_config['translator_agent'],# type: ignore[index]
+            llm=self.llm_model,
             verbose=True
         )
 
@@ -35,15 +41,15 @@ class FionicaBabyChatbot():
     # task dependencies, and task callbacks, check out the documentation:
     # https://docs.crewai.com/concepts/tasks#overview-of-a-task
     @task
-    def research_task(self) -> Task:
+    def entry_task(self) -> Task:
         return Task(
-            config=self.tasks_config['research_task'],
+            config=self.tasks_config['entry_task'],# type: ignore[index]
         )
 
     @task
-    def reporting_task(self) -> Task:
+    def second_task(self) -> Task:
         return Task(
-            config=self.tasks_config['reporting_task'],
+            config=self.tasks_config['second_task'],# type: ignore[index]
             output_file='report.md'
         )
 
@@ -54,9 +60,9 @@ class FionicaBabyChatbot():
         # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
 
         return Crew(
-            agents=self.agents, # Automatically created by the @agent decorator
-            tasks=self.tasks, # Automatically created by the @task decorator
+            agents=self.agents,
+            tasks=self.tasks,
             process=Process.sequential,
             verbose=True,
-            # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
+
         )

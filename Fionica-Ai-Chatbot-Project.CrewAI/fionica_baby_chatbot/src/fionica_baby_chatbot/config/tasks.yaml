@@ -1,23 +1,15 @@
-translate_to_english_task:
+entry_task:
   description: >
-    Translate {topic} to english ONLY if its in different language or not in english or a mix of different language and 
-    english. Make bullet form format:
-    1. English translation
-    2. Original text
+    Make 10 list of possible ways to reply like either using one word, to a sentence, to a
+    question of what, how, when, why, who, about the {topic}.
   expected_output: >
-    Make bullet form of translation of english version and original text.
-  agent: agent2
+    Make 10 list of possible ways to answer after the {topic} is said
+  agent: school_girl_agent
 
-make_conversation_task:
+second_task:
   description: >
-    Make a conversation based on the bullet text. if it has parenthesis, do the same format as that.
+    Among the 10 list provided, choose one you like to reply
   expected_output: >
-    Reply a most likely conversation like a multi turn communication. dont change the format of
-  agent:
+    from the list of 10 list provided and based on {topic}, choose one you want to use
+  agent: school_girl_agent
 
-final_task:
-  description: >
-    Make a conversation based on the text given. if it has parenthesis, do the same format as that.
-  expected_output: >
-    Reply a most likely conversation like a multi turn communication. dont change the format of
-  agent:
