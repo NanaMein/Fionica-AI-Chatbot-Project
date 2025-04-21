@@ -22,42 +22,38 @@ class FionicaBabyChatbot:
 
 
     @agent
-    def school_girl_agent(self) -> Agent:
+    def identity_agent(self) -> Agent:
         return Agent(
-            config=self.agents_config['school_girl_agent'],# type: ignore[index]
+            config=self.agents_config['identity_agent'],# type: ignore[index]
             llm=self.llm_model,
             verbose=True
         )
 
-    @agent
-    def translator_agent(self) -> Agent:
-        return Agent(
-            config=self.agents_config['translator_agent'],# type: ignore[index]
-            llm=self.llm_model,
-            verbose=True
-        )
+    # @agent
+    # def translator_agent(self) -> Agent:
+    #     return Agent(
+    #         config=self.agents_config['translator_agent'],# type: ignore[index]
+    #         llm=self.llm_model,
+    #         verbose=True
+    #     )
 
-    # To learn more about structured task outputs,
-    # task dependencies, and task callbacks, check out the documentation:
-    # https://docs.crewai.com/concepts/tasks#overview-of-a-task
+
     @task
     def entry_task(self) -> Task:
         return Task(
             config=self.tasks_config['entry_task'],# type: ignore[index]
         )
 
-    @task
-    def second_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['second_task'],# type: ignore[index]
-            output_file='report.md'
-        )
+    # @task
+    # def second_task(self) -> Task:
+    #     return Task(
+    #         config=self.tasks_config['second_task'],# type: ignore[index]
+    #         output_file='report.md'
+    #     )
 
     @crew
     def crew(self) -> Crew:
-        """Creates the FionicaBabyChatbot crew"""
-        # To learn how to add knowledge sources to your crew, check out the documentation:
-        # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
+
 
         return Crew(
             agents=self.agents,

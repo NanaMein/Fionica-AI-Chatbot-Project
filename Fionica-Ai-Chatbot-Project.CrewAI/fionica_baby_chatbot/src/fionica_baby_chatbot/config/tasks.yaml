@@ -1,15 +1,10 @@
 entry_task:
   description: >
-    Make 10 list of possible ways to reply like either using one word, to a sentence, to a
-    question of what, how, when, why, who, about the {topic}.
+    Have a conversation about {topic} or talk about {topic}
   expected_output: >
-    Make 10 list of possible ways to answer after the {topic} is said
-  agent: school_girl_agent
+    have a normal conversation based on {topic}. not more than 5 sentences and full of
+    explanation. minimum of 1 sentence to 4 sentences.
+  agent: identity_agent
 
-second_task:
-  description: >
-    Among the 10 list provided, choose one you like to reply
-  expected_output: >
-    from the list of 10 list provided and based on {topic}, choose one you want to use
-  agent: school_girl_agent
+
 
